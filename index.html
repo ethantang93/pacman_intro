@@ -5,6 +5,7 @@
     <meta charset="utf-8">
     <title>PACMAN!</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <style>
     .world {
@@ -37,7 +38,19 @@
     <!-- <div class="wall"></div>
         <div class="ground"></div> -->
     <!-- <img class="pacman" src="pacman.png" alt="pacman"> -->
+    <h1 id="startgame">Click SPACEBAR to Start the GAME!</h1>
     <h2></h2>
+    <h1>Countdown Clock</h1>
+    <div id="clockdiv">
+        <div>
+            <span class="minutes"></span>
+            <div class="smalltext">Minutes</div>
+        </div>
+        <div>
+            <span class="seconds"></span>
+            <div class="smalltext">Seconds</div>
+        </div>
+    </div>
 </body>
 
 <script>
@@ -48,24 +61,24 @@
     var score = 0;
     var map = [
         [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 0, 0, 1, 1, 0],
-        [0, 1, 0, 1, 0, 1, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0],
-        [0, 1, 0, 1, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 1, 1, 0],
-        [0, 1, 0, 1, 1, 1, 1, 1, 1, 0, 0, 1, 0, 0, 1, 0, 0, 0, 1, 0],
-        [0, 1, 1, 1, 0, 0, 0, 1, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 1, 0],
-        [0, 1, 0, 1, 0, 1, 0, 1, 1, 0, 0, 1, 0, 1, 0, 0, 0, 1, 1, 0],
-        [0, 1, 0, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 1, 0, 0, 0, 1, 1, 0],
-        [0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 0, 0, 0, 0, 0, 1, 1, 0],
+        [0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1, 0, 1, 1, 0],
+        [0, 1, 0, 1, 0, 1, 0, 0, 1, 0, 0, 0, 0, 1, 0, 1, 0, 1, 1, 0],
+        [0, 1, 0, 1, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 0, 1, 0, 1, 1, 0],
+        [0, 1, 0, 1, 1, 1, 1, 1, 1, 0, 0, 1, 0, 0, 1, 1, 1, 0, 1, 0],
+        [0, 1, 1, 1, 0, 0, 0, 1, 1, 0, 0, 1, 0, 0, 1, 0, 1, 1, 1, 0],
+        [0, 1, 0, 1, 0, 1, 0, 1, 1, 0, 0, 1, 0, 1, 1, 0, 0, 1, 1, 0],
+        [0, 1, 0, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 1, 1, 0, 0, 1, 1, 0],
+        [0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 1, 0],
         [0, 3, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0],
         [0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 0, 0, 1, 0, 0, 0, 1, 0],
         [0, 1, 0, 1, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 1, 0],
-        [0, 1, 0, 1, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 0, 1, 0],
-        [0, 1, 0, 1, 1, 1, 1, 1, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 1, 0],
-        [0, 1, 1, 1, 0, 0, 0, 1, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 1, 0],
-        [0, 1, 0, 1, 0, 1, 0, 1, 1, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0],
-        [0, 1, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0],
-        [0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0],
-        [0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0],
+        [0, 1, 0, 1, 0, 1, 0, 0, 1, 0, 0, 1, 1, 0, 1, 0, 0, 0, 1, 0],
+        [0, 1, 0, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 0, 1, 0, 0, 1, 1, 0],
+        [0, 1, 1, 1, 0, 0, 0, 1, 1, 0, 0, 1, 1, 0, 1, 0, 0, 1, 1, 0],
+        [0, 1, 0, 1, 0, 1, 0, 1, 1, 0, 1, 0, 1, 1, 0, 0, 0, 1, 1, 0],
+        [0, 1, 0, 0, 0, 1, 0, 0, 1, 0, 1, 0, 0, 1, 0, 0, 0, 1, 1, 0],
+        [0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 1, 0],
+        [0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 0, 0, 0, 0, 0, 1, 0],
         [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
     ];
 
@@ -90,66 +103,114 @@
 
     drawWorld();
 
+
     $(document).on("keydown", "html", function(e) {
-                if (e.keyCode == 37) {
-                    console.log("LEFT")
-                    if (map[pacman.y][pacman.x - 1] !== 0) {
-                        if (map[pacman.y][pacman.x - 1] == 1) {
-                          score+=1;
-                          console.log(score);
-                        }
-                        map[pacman.y][pacman.x] = 2
-                        pacman.x = pacman.x - 1
-                        map[pacman.y][pacman.x] = 3
-                        drawWorld();
-                        $('.pacman').css("transform", "rotate(180deg)");
-                    }
+        if (e.keyCode == 32){
+            $('#startgame').hide();
+            ////////////////////////////////////////////////COUNTDOWN TIMER//////////////////////////////////////
+            ////////////////////////////////////////////////COUNTDOWN TIMER//////////////////////////////////////
+            ////////////////////////////////////////////////COUNTDOWN TIMER//////////////////////////////////////
 
-                }
-                if (e.keyCode == 38) {
-                    console.log("UP")
-                    if (map[pacman.y - 1][pacman.x] !== 0) {
-                        if (map[pacman.y - 1][pacman.x] == 1) {
-                          score+=1;
-                          console.log(score);
-                        }
-                        map[pacman.y][pacman.x] = 2
-                        pacman.y = pacman.y - 1
-                        map[pacman.y][pacman.x] = 3
-                        drawWorld();
-                        $('.pacman').css("transform", "rotate(270deg)")
+            function getTimeRemaining(endtime) {
+                var t = Date.parse(endtime) - Date.parse(new Date());
+                var seconds = Math.floor((t / 1000) % 60);
+                var minutes = Math.floor((t / 1000 / 60) % 60);
+                return {
+                    'total': t,
+                    'minutes': minutes,
+                    'seconds': seconds
+                };
+            }
 
-                    }
+            function initializeClock(id, endtime) {
+                var clock = document.getElementById(id);
+                var minutesSpan = clock.querySelector('.minutes');
+                var secondsSpan = clock.querySelector('.seconds');
 
-                  }
-                if (e.keyCode == 39) {
-                    console.log("RIGHT")
-                    if (map[pacman.y][pacman.x + 1] !== 0) {
-                        if (map[pacman.y][pacman.x + 1] == 1) {
-                          score+=1;
-                          console.log(score);
-                        }
-                        map[pacman.y][pacman.x] = 2
-                        pacman.x = pacman.x + 1
-                        map[pacman.y][pacman.x] = 3
-                        drawWorld();
-                    }
+                function updateClock() {
+                    var t = getTimeRemaining(endtime);
+                    minutesSpan.innerHTML = ('0' + t.minutes).slice(-2);
+                    secondsSpan.innerHTML = ('0' + t.seconds).slice(-2);
 
-                }
-                if (e.keyCode == 40) {
-                    console.log("DOWN")
-                    if (map[pacman.y + 1][pacman.x] !== 0) {
-                          if (map[pacman.y + 1][pacman.x] == 1) {
-                            score+=1;
-                            console.log(score);
-                          }
-                          map[pacman.y][pacman.x] = 2
-                          pacman.y = pacman.y + 1
-                          map[pacman.y][pacman.x] = 3
-                          drawWorld();
-                          $('.pacman').css("transform", "rotate(90deg)")
+                    if (t.total <= 0) {
+                        clearInterval(timeinterval);
                     }
                 }
+
+                updateClock();
+                var timeinterval = setInterval(updateClock, 1000);
+            }
+
+            var deadline = new Date(Date.parse(new Date()) + 60 * 1000);
+            initializeClock('clockdiv', deadline);
+
+
+            /////////////////////////////////////////////COUNTDOWN TIMER//////////////////////////////////////
+            /////////////////////////////////////////////COUNTDOWN TIMER//////////////////////////////////////
+            /////////////////////////////////////////////COUNTDOWN TIMER//////////////////////////////////////
+        }
+
+
+
+        if (e.keyCode == 37) {
+            console.log("LEFT")
+            if (map[pacman.y][pacman.x - 1] !== 0) {
+                if (map[pacman.y][pacman.x - 1] == 1) {
+                    score += 1;
+                    console.log(score);
+                }
+                map[pacman.y][pacman.x] = 2
+                pacman.x = pacman.x - 1
+                map[pacman.y][pacman.x] = 3
+                drawWorld();
+                $('.pacman').css("transform", "rotate(180deg)");
+            }
+
+        }
+        if (e.keyCode == 38) {
+            console.log("UP")
+            if (map[pacman.y - 1][pacman.x] !== 0) {
+                if (map[pacman.y - 1][pacman.x] == 1) {
+                    score += 1;
+                    console.log(score);
+                }
+                map[pacman.y][pacman.x] = 2
+                pacman.y = pacman.y - 1
+                map[pacman.y][pacman.x] = 3
+                drawWorld();
+                $('.pacman').css("transform", "rotate(270deg)")
+
+            }
+
+        }
+        if (e.keyCode == 39) {
+            console.log("RIGHT")
+            if (map[pacman.y][pacman.x + 1] !== 0) {
+                if (map[pacman.y][pacman.x + 1] == 1) {
+                    score += 1;
+                    console.log(score);
+                }
+                map[pacman.y][pacman.x] = 2
+                pacman.x = pacman.x + 1
+                map[pacman.y][pacman.x] = 3
+                drawWorld();
+            }
+
+        }
+        if (e.keyCode == 40) {
+            console.log("DOWN")
+            if (map[pacman.y + 1][pacman.x] !== 0) {
+                if (map[pacman.y + 1][pacman.x] == 1) {
+                    score += 1;
+                    console.log(score);
+                }
+                map[pacman.y][pacman.x] = 2
+                pacman.y = pacman.y + 1
+                map[pacman.y][pacman.x] = 3
+                drawWorld();
+                $('.pacman').css("transform", "rotate(90deg)")
+            }
+        }
     })
 </script>
 
