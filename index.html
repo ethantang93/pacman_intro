@@ -37,13 +37,15 @@
     <!-- <div class="wall"></div>
         <div class="ground"></div> -->
     <!-- <img class="pacman" src="pacman.png" alt="pacman"> -->
+    <h2></h2>
 </body>
 
 <script>
     var pacman = {
         x: 1,
         y: 9
-    }
+    };
+    var score = 0;
     var map = [
         [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
         [0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 0, 0, 1, 1, 0],
@@ -82,6 +84,8 @@
                 }
             }
         }
+        $('h2').text('Your Score is   ' + score);
+
     }
 
     drawWorld();
@@ -90,16 +94,25 @@
                 if (e.keyCode == 37) {
                     console.log("LEFT")
                     if (map[pacman.y][pacman.x - 1] !== 0) {
+                        if (map[pacman.y][pacman.x - 1] == 1) {
+                          score+=1;
+                          console.log(score);
+                        }
                         map[pacman.y][pacman.x] = 2
                         pacman.x = pacman.x - 1
                         map[pacman.y][pacman.x] = 3
                         drawWorld();
                         $('.pacman').css("transform", "rotate(180deg)");
                     }
+
                 }
                 if (e.keyCode == 38) {
                     console.log("UP")
                     if (map[pacman.y - 1][pacman.x] !== 0) {
+                        if (map[pacman.y - 1][pacman.x] == 1) {
+                          score+=1;
+                          console.log(score);
+                        }
                         map[pacman.y][pacman.x] = 2
                         pacman.y = pacman.y - 1
                         map[pacman.y][pacman.x] = 3
@@ -107,27 +120,37 @@
                         $('.pacman').css("transform", "rotate(270deg)")
 
                     }
+
                   }
                 if (e.keyCode == 39) {
                     console.log("RIGHT")
                     if (map[pacman.y][pacman.x + 1] !== 0) {
+                        if (map[pacman.y][pacman.x + 1] == 1) {
+                          score+=1;
+                          console.log(score);
+                        }
                         map[pacman.y][pacman.x] = 2
                         pacman.x = pacman.x + 1
                         map[pacman.y][pacman.x] = 3
                         drawWorld();
                     }
+
                 }
                 if (e.keyCode == 40) {
                     console.log("DOWN")
                     if (map[pacman.y + 1][pacman.x] !== 0) {
-                            map[pacman.y][pacman.x] = 2
-                            pacman.y = pacman.y + 1
-                            map[pacman.y][pacman.x] = 3
-                            drawWorld();
-                            $('.pacman').css("transform", "rotate(90deg)")
+                          if (map[pacman.y + 1][pacman.x] == 1) {
+                            score+=1;
+                            console.log(score);
+                          }
+                          map[pacman.y][pacman.x] = 2
+                          pacman.y = pacman.y + 1
+                          map[pacman.y][pacman.x] = 3
+                          drawWorld();
+                          $('.pacman').css("transform", "rotate(90deg)")
                     }
                 }
-                })
+    })
 </script>
 
 </html>
